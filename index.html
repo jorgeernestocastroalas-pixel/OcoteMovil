@@ -7,66 +7,74 @@
   <style>
     :root {
       --bg: #000000;
-      --panel: #0b1018;
-      --surface: #131b26;
-      --surface-2: #1c2736;
+      --panel: #0b111a;
+      --surface: #131c29;
+      --surface-2: #1c293b;
       --text: #ffffff;
       --muted: #e2e8f0;
       --border: #334155;
       --cat-top: #3b7be8;
-      --cat-bot: #1d499e;
-      --cat-border: #7aaaff;
+      --cat-bot: #1b4596;
+      --cat-border: #8ab4ff;
       --accent: #ffffff;
       --accent-text: #000000;
     }
 
     * {
       box-sizing: border-box;
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.16);
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.18);
     }
 
-    html, body {
+    html {
+      font-size: 50px;
+      background: var(--bg);
+    }
+
+    body {
       margin: 0;
       padding: 0;
       background: var(--bg);
       color: var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      min-height: 100%;
-      font-size: 40px;
-      line-height: 1.2;
+      font-size: 1rem;
+      line-height: 1.15;
+      min-height: 100vh;
     }
 
     .app-shell {
       width: 100%;
-      max-width: 1080px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 20px 16px 240px;
+      padding: 16px 12px 260px;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
-    /* Encabezado */
+    /* Encabezado con presencia fuerte para OCOTEMOVIL */
     .header {
       text-align: center;
-      padding: 16px 8px 20px;
-      border-bottom: 2px solid var(--border);
-      margin-bottom: 20px;
+      padding: 20px 10px 22px;
+      background: var(--panel);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      margin-bottom: 18px;
     }
 
     .brand-title {
       margin: 0;
-      font-size: 50px;
+      font-size: 1.15em;
       font-weight: 900;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      line-height: 1.08;
+      line-height: 1.05;
+      color: var(--text);
     }
 
     .brand-sub {
       margin: 10px 0 0;
-      font-size: 40px;
-      font-weight: 600;
+      font-size: 0.72em;
+      font-weight: 700;
       color: var(--muted);
       line-height: 1.15;
     }
@@ -77,7 +85,7 @@
       background: var(--bg);
       border: 2px solid var(--border);
       border-radius: 14px;
-      padding: 12px;
+      padding: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -85,19 +93,21 @@
     }
 
     .banner-zone-top {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    /* Empuja el banner inferior hasta abajo, lejos de los resultados */
+    /* Empuja el banner inferior hasta el fondo, separado de los resultados */
     .banner-zone-bottom {
-      margin-top: 64px;
+      margin-top: auto;
+      padding-top: 12px;
       margin-bottom: 24px;
+      transform: translateY(36px);
     }
 
     .banner-frame-728 {
       width: 100%;
       max-width: 728px;
-      min-height: 90px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -119,7 +129,7 @@
         margin-bottom: -50px;
       }
       .banner-frame-728 {
-        min-height: 52px;
+        min-height: 50px;
       }
     }
 
@@ -156,7 +166,7 @@
 
     .cliente-slide-name {
       font-weight: 800;
-      font-size: 40px;
+      font-size: 0.85em;
       color: var(--text);
       text-align: center;
       line-height: 1.15;
@@ -168,10 +178,10 @@
       color: var(--accent-text);
       text-decoration: none;
       font-weight: 900;
-      font-size: 40px;
-      padding: 16px 20px;
+      font-size: 0.85em;
+      padding: 16px 18px;
       border-radius: 12px;
-      min-height: 80px;
+      min-height: 82px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -180,15 +190,15 @@
 
     /* Buscador */
     .search-box {
-      margin: 18px 0 22px;
+      margin: 14px 0 18px;
     }
 
     .search-input {
       width: 100%;
       min-height: 84px;
-      padding: 16px 18px;
-      font-size: 40px;
-      font-weight: 600;
+      padding: 14px 16px;
+      font-size: 0.82em;
+      font-weight: 700;
       color: var(--text);
       background: var(--surface);
       border: 2px solid var(--border);
@@ -200,24 +210,25 @@
       border-color: var(--cat-border);
     }
 
-    /* Caja principal de directorio tipo tablero */
+    /* Tablero de categorías */
     .directory-board {
       background: var(--panel);
       border: 2px solid var(--border);
       border-radius: 16px;
-      padding: 18px 14px 24px;
+      padding: 16px 12px 22px;
+      margin-bottom: 24px;
     }
 
     .board-head {
       text-align: center;
-      padding-bottom: 16px;
-      margin-bottom: 18px;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
       border-bottom: 2px solid var(--border);
     }
 
     .board-title {
       margin: 0;
-      font-size: 50px;
+      font-size: 0.96em;
       font-weight: 900;
       letter-spacing: 0.02em;
       text-transform: uppercase;
@@ -225,28 +236,28 @@
     }
 
     .board-sub {
-      margin: 10px 0 0;
-      font-size: 40px;
+      margin: 8px 0 0;
+      font-size: 0.68em;
       font-weight: 600;
       color: var(--muted);
-      line-height: 1.18;
+      line-height: 1.15;
     }
 
     /* Dos columnas para categorías */
     .categories-two-col {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
     }
 
     .cat-btn {
-      min-height: 110px;
-      padding: 14px 10px;
+      min-height: 112px;
+      padding: 14px 8px;
       border-radius: 14px;
       border: 2px solid var(--cat-border);
       background: linear-gradient(180deg, var(--cat-top) 0%, var(--cat-bot) 100%);
       color: var(--text);
-      font-size: 40px;
+      font-size: 0.8em;
       font-weight: 800;
       line-height: 1.12;
       cursor: pointer;
@@ -263,10 +274,10 @@
       border-color: var(--accent);
     }
 
-    /* Despliegue de comercios al tocar una categoría o buscar */
+    /* Despliegue de comercios */
     .results-panel {
-      margin-top: 28px;
-      padding-top: 22px;
+      margin-top: 24px;
+      padding-top: 18px;
       border-top: 2px solid var(--border);
     }
 
@@ -274,13 +285,13 @@
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
     .results-heading {
       margin: 0;
-      font-size: 46px;
+      font-size: 0.88em;
       font-weight: 900;
       text-transform: uppercase;
       line-height: 1.12;
@@ -288,12 +299,12 @@
 
     .btn-clear-cat {
       min-height: 82px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       border-radius: 12px;
       border: 2px solid var(--border);
       background: var(--surface-2);
       color: var(--text);
-      font-size: 40px;
+      font-size: 0.8em;
       font-weight: 800;
       cursor: pointer;
     }
@@ -301,22 +312,22 @@
     .cards-list {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
 
     .biz-card {
       background: var(--surface);
       border: 2px solid var(--border);
       border-radius: 14px;
-      padding: 18px 16px;
+      padding: 16px 14px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .biz-name {
       margin: 0;
-      font-size: 48px;
+      font-size: 0.92em;
       font-weight: 900;
       text-transform: uppercase;
       color: var(--text);
@@ -325,7 +336,7 @@
 
     .biz-detail {
       margin: 0;
-      font-size: 40px;
+      font-size: 0.78em;
       font-weight: 500;
       color: var(--muted);
       line-height: 1.2;
@@ -334,19 +345,19 @@
     .biz-actions {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       margin-top: 4px;
     }
 
     .btn-wa {
       width: 100%;
-      min-height: 88px;
-      padding: 16px 18px;
+      min-height: 86px;
+      padding: 14px 16px;
       border-radius: 12px;
       border: 2px solid #25d366;
       background: #169c48;
       color: #ffffff;
-      font-size: 40px;
+      font-size: 0.82em;
       font-weight: 800;
       line-height: 1.15;
       text-decoration: none;
@@ -359,13 +370,13 @@
 
     .btn-modal-open {
       width: 100%;
-      min-height: 84px;
-      padding: 14px 18px;
+      min-height: 82px;
+      padding: 12px 16px;
       border-radius: 12px;
       border: 2px solid var(--border);
       background: var(--surface-2);
       color: var(--text);
-      font-size: 40px;
+      font-size: 0.8em;
       font-weight: 800;
       line-height: 1.15;
       cursor: pointer;
@@ -379,11 +390,11 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.92);
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 14px;
+      padding: 12px;
       z-index: 999;
     }
 
@@ -393,41 +404,40 @@
 
     .modal-panel {
       width: 100%;
-      max-width: 920px;
       max-height: 92vh;
       overflow-y: auto;
       background: var(--surface);
       border: 2px solid var(--accent);
       border-radius: 16px;
-      padding: 20px 16px;
+      padding: 18px 14px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     .modal-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
     .modal-title {
       margin: 0;
-      font-size: 48px;
+      font-size: 0.9em;
       font-weight: 900;
       text-transform: uppercase;
       line-height: 1.12;
     }
 
     .modal-close {
-      min-width: 80px;
-      min-height: 80px;
+      min-width: 78px;
+      min-height: 78px;
       border-radius: 12px;
       border: 2px solid var(--border);
       background: var(--surface-2);
       color: var(--text);
-      font-size: 40px;
+      font-size: 0.8em;
       font-weight: 900;
       cursor: pointer;
       flex-shrink: 0;
@@ -436,14 +446,14 @@
     .modal-wa-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .modal-ad-320 {
       width: 100%;
       display: flex;
       justify-content: center;
-      padding-top: 14px;
+      padding-top: 12px;
       border-top: 2px solid var(--border);
     }
 
@@ -454,26 +464,26 @@
       right: 0;
       bottom: 0;
       background: var(--bg);
-      border-top: 2px solid var(--border);
-      padding: 12px 14px;
+      border-top: 2px solid var(--accent);
+      padding: 10px 10px;
       z-index: 900;
     }
 
     .footer-inner {
-      max-width: 1080px;
+      width: 100%;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
     }
 
     .footer-btn {
-      min-height: 86px;
-      padding: 12px 10px;
+      min-height: 88px;
+      padding: 10px 8px;
       border-radius: 12px;
-      font-size: 40px;
-      font-weight: 800;
-      line-height: 1.1;
+      font-size: 0.76em;
+      font-weight: 900;
+      line-height: 1.08;
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -494,8 +504,8 @@
 
     .status-note {
       color: var(--muted);
-      font-size: 40px;
-      padding: 12px 6px;
+      font-size: 0.78em;
+      padding: 10px 4px;
     }
   </style>
 </head>
@@ -542,7 +552,7 @@
       </div>
     </section>
 
-    <!-- BANNER INFERIOR (hasta abajo, separado de los resultados) -->
+    <!-- BANNER INFERIOR (empujado hacia abajo, lejos de los resultados) -->
     <section class="banner-zone banner-zone-bottom" aria-label="Anuncio inferior">
       <div id="rotator-abajo" class="banner-frame-728"></div>
     </section>
