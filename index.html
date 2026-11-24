@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ocotemovil — Directorio Local</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --text: #ffffff;
+      --muted: #cfcfcf;
+      --border: #2e2e2e;
+      --accent: #ffffff;
+      --accent-text: #000000;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100%;
+    }
+
+    .app-shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 12px 14px 110px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 8px 4px 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      margin: 4px 0 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* Zonas de Banners (arriba / abajo / modal) */
+    .banner-zone {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px;
+      margin: 10px 0 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 68px;
+    }
+
+    .banner-frame-728 {
+      width: 100%;
+      max-width: 728px;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Escala limpia en pantallas estrechas para no desbordar */
+    .ad-728-slot {
+      width: 728px;
+      height: 90px;
+      transform-origin: center top;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 759px) {
+      .ad-728-slot {
+        transform: scale(0.44);
+        margin-bottom: -50px;
+      }
+      .banner-frame-728 {
+        min-height: 52px;
+      }
+    }
+
+    .cliente-slide {
+      width: 100%;
+      max-width: 728px;
+      min-height: 56px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .cliente-slide-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      flex: 1 1 200px;
+    }
+
+    .cliente-slide-img {
+      max-height: 54px;
+      max-width: 140px;
+      width: auto;
+      height: auto;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .cliente-slide-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cliente-slide-btn {
+      background: var(--accent);
+      color: var(--accent-text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 14px;
+      border-radius: 8px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    /* Buscador */
+    .search-box {
+      margin: 12px 0;
+    }
+
+    .search-input {
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    /* Botonera de categorías */
+    .section-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 14px 0 8px;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .cat-btn {
+      min-height: 52px;
+      padding: 10px 12px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .cat-btn.active {
+      background: var(--accent);
+      color: var(--accent-text);
+      border-color: var(--accent);
+    }
+
+    /* Tarjetas de negocios (segunda pantalla / resultados) */
+    .cards-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .biz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .biz-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .biz-name {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .badge-destacado {
+      background: var(--accent);
+      color: var(--accent-text);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .biz-detail {
+      margin: 0;
+      font-size: 0.96rem;
+      color: var(--muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .biz-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-action {
+      flex: 1 1 140px;
+      min-height: 50px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: var(--accent-text);
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .btn-secondary {
+      background: var(--surface-2);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    /* Ventana Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      z-index: 999;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-panel {
+      width: 100%;
+      max-width: 440px;
+      max-height: 92vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .modal-close {
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .modal-ad-320 {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Pie fijo inferior */
+    .footer-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 10px 14px;
+      z-index: 900;
+    }
+
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .footer-btn {
+      min-height: 48px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .footer-btn-add {
+      background: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .footer-btn-support {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--accent);
+    }
+
+    .status-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding: 12px 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="header">
+      <h1 class="brand-title">Ocotemovil</h1>
+      <p class="brand-sub">Directorio Local · Ocotepeque y Sinuapa</p>
+    </header>
+
+    <!-- BANNER SUPERIOR (rotación cada 5s con Adsterra si hay anunciantes en "arriba") -->
+    <section class="banner-zone" aria-label="Anuncio superior">
+      <div id="rotator-arriba" class="banner-frame-728"></div>
+    </section>
+
+    <!-- BUSCADOR -->
+    <div class="search-box">
+      <input
+        id="buscador"
+        class="search-input"
+        type="search"
+        placeholder="Buscar negocio, comida, mandado o barrio..."
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- CATEGORÍAS DINÁMICAS -->
+    <div class="section-label">Categorías</div>
+    <div id="categorias" class="categories-grid"></div>
+
+    <!-- LISTADO DE NEGOCIOS / DESTACADOS -->
+    <div id="titulo-listado" class="section-label">Negocios destacados</div>
+    <div id="listado" class="cards-list">
+      <div class="status-note">Cargando directorio...</div>
+    </div>
+
+    <!-- BANNER INFERIOR (rotación cada 5s con Adsterra si hay anunciantes en "abajo") -->
+    <section class="banner-zone" aria-label="Anuncio inferior">
+      <div id="rotator-abajo" class="banner-frame-728"></div>
+    </section>
+  </div>
+
+  <!-- VENTANA MODAL -->
+  <div id="modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 id="modal-title" class="modal-title">Detalle del negocio</h2>
+        <button id="modal-close" class="modal-close" type="button" aria-label="Cerrar">✕</button>
+      </div>
+      <p id="modal-detalle" class="biz-detail"></p>
+      <div id="modal-botones" class="biz-actions"></div>
+
+      <!-- BANNER 320x50 DEBAJO DEL BOTÓN DE WHATSAPP -->
+      <div id="modal-ad-container" class="modal-ad-320"></div>
+    </div>
+  </div>
+
+  <!-- PIE FIJO CON SOLO LOS DOS BOTONES ACORDADOS -->
+  <footer class="footer-bar">
+    <div class="footer-inner">
+      <a id="btn-agregar-negocio" class="footer-btn footer-btn-add" href="#" target="_blank" rel="noopener">
+        Agregar negocio
+      </a>
+      <a
+        class="footer-btn footer-btn-support"
+        href="https://guia.puntoventa.shop/2026/11/campana-solidaria-local-con-un-clic.html"
+        target="_blank"
+        rel="noopener"
+      >
+        Apoyo con tu click
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const SHEET_ID = "11uzHhgbs4NFzdd3e1RfFtQ_wKN-_jGssMcouPk8E1WI";
+
+    const CONFIG = {
+      csvDirectorio: `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Directorio`,
+      csvAnuncios: `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Anuncios`,
+
+      // Número de WhatsApp de administración para "Agregar negocio"
+      waAdmin: "50488362713",
+      mensajeAgregarNegocio: "Hola, quiero agregar mi negocio en Ocotemovil",
+
+      // Intervalo de rotación en milisegundos (5 segundos)
+      rotacionMs: 5000,
+
+      // Claves Adsterra
+      adsterra728Key: "94a60368d80726e04cbdceea35d7410e",
+      adsterra320Key: "f0790f0b6da44120e1c6c4bc8bcb72bb",
+      adsterraSrcBase: "https://bicea.org/22/"
+    };
+
+    // Respaldo inicial tomado de tu hoja "Ocotemovil - Directorio Local"
+    const FALLBACK_DIRECTORIO = [
+      {
+        categoria: "Domicilios y Comida",
+        negocio: "Pollo Sabroso",
+        detalle: "Pollo frito y combos - Barrio Las Flores",
+        tel1: "50499887766",
+        etiqueta1: "Pedir por WhatsApp",
+        tel2: "50426531122",
+        etiqueta2: "WhatsApp 2",
+        destacado: "SI",
+        mensaje: "Hola, los vi en Ocotemovil, quiero hacer un pedido",
+        activo: "SI"
+      },
+      {
+        categoria: "Transporte y Mandados",
+        negocio: "Mandaditos Ocotepeque",
+        detalle: "Envíos rápidos y compras en Ocotepeque y Sinuapa",
+        tel1: "50488776655",
+        etiqueta1: "Pedir Mandado",
+        tel2: "",
+        etiqueta2: "",
+        destacado: "NO",
+        mensaje: "Hola, los vi en Ocotemovil, necesito un mandado",
+        activo: "SI"
+      }
+    ];
+
+    const FALLBACK_ANUNCIOS = [
+      {
+        espacio: "arriba",
+        negocio: "Ferretería El Centro",
+        imagen_url: "",
+        whatsapp_tel: "50499887766",
+        mensaje_wa: "Hola, vi su anuncio en Ocotemovil",
+        activo: "SI"
+      },
+      {
+        espacio: "abajo",
+        negocio: "Comedor Doña Marta",
+        imagen_url: "",
+        whatsapp_tel: "50488776655",
+        mensaje_wa: "Hola, los vi en Ocotemovil",
+        activo: "SI"
+      }
+    ];
+
+    let negocios = [];
+    let anuncios = [];
+    let categoriaActiva = "";
+    let textoBusqueda = "";
+
+    function construirUrlWa(telefono, mensaje) {
+      const limpio = String(telefono || "").replace(/\D/g, "");
+      if (!limpio) return "#";
+      const texto = encodeURIComponent(mensaje || "Hola, los vi en Ocotemovil");
+      return `https://wa.me/${limpio}?text=${texto}`;
+    }
+
+    function parseCSV(csvText) {
+      const rows = [];
+      let currentRow = [];
+      let currentVal = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < csvText.length; i++) {
+        const ch = csvText[i];
+        const next = csvText[i + 1];
+
+        if (inQuotes) {
+          if (ch === '"' && next === '"') {
+            currentVal += '"';
+            i++;
+          } else if (ch === '"') {
+            inQuotes = false;
+          } else {
+            currentVal += ch;
+          }
+        } else {
+          if (ch === '"') {
+            inQuotes = true;
+          } else if (ch === ",") {
+            currentRow.push(currentVal.trim());
+            currentVal = "";
+          } else if (ch === "\n" || (ch === "\r" && next === "\n")) {
+            currentRow.push(currentVal.trim());
+            if (currentRow.some(cell => cell !== "")) {
+              rows.push(currentRow);
+            }
+            currentRow = [];
+            currentVal = "";
+            if (ch === "\r") i++;
+          } else {
+            currentVal += ch;
+          }
+        }
+      }
+
+      if (currentVal.length > 0 || currentRow.length > 0) {
+        currentRow.push(currentVal.trim());
+        if (currentRow.some(cell => cell !== "")) {
+          rows.push(currentRow);
+        }
+      }
+
+      if (rows.length < 2) return [];
+      const headers = rows[0].map(h => h.toLowerCase().trim());
+      return rows.slice(1).map(r => {
+        const obj = {};
+        headers.forEach((h, idx) => {
+          obj[h] = (r[idx] || "").trim();
+        });
+        return obj;
+      });
+    }
+
+    async function cargarCSV(url, fallback) {
+      if (!url) return fallback;
+      try {
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) return fallback;
+        const text = await resp.text();
+        if (text.trim().startsWith("<!DOCTYPE") || text.includes("<html")) return fallback;
+        const parsed = parseCSV(text);
+        return parsed.length ? parsed : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function renderAdsterra728(container) {
+      container.innerHTML = "";
+      const slot = document.createElement("div");
+      slot.className = "ad-728-slot";
+
+      const iframe = document.createElement("iframe");
+      iframe.width = "728";
+      iframe.height = "90";
+      iframe.frameBorder = "0";
+      iframe.scrolling = "no";
+      iframe.style.border = "0";
+      iframe.style.background = "#000000";
+
+      const docHtml = `
+        <!DOCTYPE html>
+        <html>
+        <head><meta charset="utf-8"><style>body{margin:0;padding:0;background:#000;display:flex;justify-content:center;align-items:center;}</style></head>
+        <body>
+          <script>
+            atOptions = {
+              'key' : '${CONFIG.adsterra728Key}',
+              'format' : 'iframe',
+              'height' : 90,
+              'width' : 728,
+              'params' : {}
+            };
+          <\/script>
+          <script data-cfasync="false" src="${CONFIG.adsterraSrcBase}${CONFIG.adsterra728Key}"><\/script>
+        </body>
+        </html>
+      `;
+
+      iframe.srcdoc = docHtml;
+      slot.appendChild(iframe);
+      container.appendChild(slot);
+    }
+
+    function renderClienteSlide(container, anuncio) {
+      container.innerHTML = "";
+      const card = document.createElement("div");
+      card.className = "cliente-slide";
+
+      const info = document.createElement("div");
+      info.className = "cliente-slide-info";
+
+      if (anuncio.imagen_url) {
+        const img = document.createElement("img");
+        img.className = "cliente-slide-img";
+        img.src = anuncio.imagen_url;
+        img.alt = anuncio.negocio || "Anuncio";
+        info.appendChild(img);
+      }
+
+      const nombre = document.createElement("span");
+      nombre.className = "cliente-slide-name";
+      nombre.textContent = anuncio.negocio || "Negocio local";
+      info.appendChild(nombre);
+
+      const waLink = document.createElement("a");
+      waLink.className = "cliente-slide-btn";
+      waLink.href = construirUrlWa(anuncio.whatsapp_tel, anuncio.mensaje_wa);
+      waLink.target = "_blank";
+      waLink.rel = "noopener";
+      waLink.textContent = "WhatsApp";
+
+      card.appendChild(info);
+      card.appendChild(waLink);
+      container.appendChild(card);
+    }
+
+    function iniciarRotadorEspacio(containerId, espacioNombre) {
+      const container = document.getElementById(containerId);
+      const activos = anuncios.filter(
+        a => (a.espacio || "").toLowerCase() === espacioNombre && (a.activo || "").toUpperCase() === "SI"
+      );
+
+      // Sin anunciantes activos: Adsterra fijo
+      if (!activos.length) {
+        renderAdsterra728(container);
+        return;
+      }
+
+      // Con anunciantes activos: gira cada 5s incluyendo Adsterra ("adsterra" + cada cliente)
+      const items = [{ tipo: "adsterra" }, ...activos.map(a => ({ tipo: "cliente", data: a }))];
+      let idx = 0;
+
+      const mostrarActual = () => {
+        const current = items[idx % items.length];
+        if (current.tipo === "adsterra") {
+          renderAdsterra728(container);
+        } else {
+          renderClienteSlide(container, current.data);
+        }
+        idx++;
+      };
+
+      mostrarActual();
+      setInterval(mostrarActual, CONFIG.rotacionMs);
+    }
+
+    function renderModalBanner320() {
+      const modalAd = document.getElementById("modal-ad-container");
+      modalAd.innerHTML = "";
+      const iframe = document.createElement("iframe");
+      iframe.width = "320";
+      iframe.height = "50";
+      iframe.frameBorder = "0";
+      iframe.scrolling = "no";
+      iframe.style.border = "0";
+      iframe.style.background = "#000000";
+
+      iframe.srcdoc = `
+        <!DOCTYPE html>
+        <html>
+        <head><meta charset="utf-8"><style>body{margin:0;padding:0;background:#000;display:flex;justify-content:center;align-items:center;}</style></head>
+        <body>
+          <script>
+            atOptions = {
+              'key' : '${CONFIG.adsterra320Key}',
+              'format' : 'iframe',
+              'height' : 50,
+              'width' : 320,
+              'params' : {}
+            };
+          <\/script>
+          <script data-cfasync="false" src="${CONFIG.adsterraSrcBase}${CONFIG.adsterra320Key}"><\/script>
+        </body>
+        </html>
+      `;
+      modalAd.appendChild(iframe);
+    }
+
+    function abrirModal(item) {
+      document.getElementById("modal-title").textContent = item.negocio || "Negocio";
+      document.getElementById("modal-detalle").textContent = item.detalle || "";
+
+      const botonesWrap = document.getElementById("modal-botones");
+      botonesWrap.innerHTML = "";
+
+      if (item.tel1) {
+        const b1 = document.createElement("a");
+        b1.className = "btn-action";
+        b1.href = construirUrlWa(item.tel1, item.mensaje);
+        b1.target = "_blank";
+        b1.rel = "noopener";
+        b1.textContent = item.etiqueta1 || "WhatsApp";
+        botonesWrap.appendChild(b1);
+      }
+
+      if (item.tel2) {
+        const b2 = document.createElement("a");
+        b2.className = "btn-action btn-secondary";
+        b2.href = construirUrlWa(item.tel2, item.mensaje);
+        b2.target = "_blank";
+        b2.rel = "noopener";
+        b2.textContent = item.etiqueta2 || "WhatsApp 2";
+        botonesWrap.appendChild(b2);
+      }
+
+      renderModalBanner320();
+      document.getElementById("modal-backdrop").classList.add("open");
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal-backdrop").classList.remove("open");
+      document.getElementById("modal-ad-container").innerHTML = "";
+    }
+
+    function renderCategorias() {
+      const wrap = document.getElementById("categorias");
+      wrap.innerHTML = "";
+
+      const cats = [...new Set(negocios.map(n => n.categoria).filter(Boolean))];
+      cats.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "cat-btn" + (categoriaActiva === cat ? " active" : "");
+        btn.textContent = cat;
+        btn.addEventListener("click", () => {
+          categoriaActiva = categoriaActiva === cat ? "" : cat;
+          renderCategorias();
+          renderListado();
+        });
+        wrap.appendChild(btn);
+      });
+    }
+
+    function renderListado() {
+      const list = document.getElementById("listado");
+      const titulo = document.getElementById("titulo-listado");
+      list.innerHTML = "";
+
+      const q = textoBusqueda.toLowerCase().trim();
+      let filtrados = negocios.filter(n => (n.activo || "SI").toUpperCase() === "SI");
+
+      if (q) {
+        titulo.textContent = `Resultados para "${textoBusqueda}"`;
+        filtrados = filtrados.filter(n =>
+          `${n.negocio} ${n.detalle} ${n.categoria}`.toLowerCase().includes(q)
+        );
+      } else if (categoriaActiva) {
+        titulo.textContent = categoriaActiva;
+        filtrados = filtrados.filter(n => n.categoria === categoriaActiva);
+      } else {
+        titulo.textContent = "Negocios destacados";
+        const destacados = filtrados.filter(n => (n.destacado || "").toUpperCase() === "SI");
+        filtrados = destacados.length ? destacados : filtrados;
+      }
+
+      if (!filtrados.length) {
+        list.innerHTML = '<div class="status-note">No se encontraron negocios con ese filtro.</div>';
+        return;
+      }
+
+      filtrados.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "biz-card";
+
+        const top = document.createElement("div");
+        top.className = "biz-top";
+
+        const h3 = document.createElement("h3");
+        h3.className = "biz-name";
+        h3.textContent = item.negocio;
+        top.appendChild(h3);
+
+        if ((item.destacado || "").toUpperCase() === "SI") {
+          const badge = document.createElement("span");
+          badge.className = "badge-destacado";
+          badge.textContent = "Destacado";
+          top.appendChild(badge);
+        }
+
+        const p = document.createElement("p");
+        p.className = "biz-detail";
+        p.textContent = item.detalle;
+
+        const actions = document.createElement("div");
+        actions.className = "biz-actions";
+
+        if (item.tel1) {
+          const a1 = document.createElement("a");
+          a1.className = "btn-action";
+          a1.href = construirUrlWa(item.tel1, item.mensaje);
+          a1.target = "_blank";
+          a1.rel = "noopener";
+          a1.textContent = item.etiqueta1 || "WhatsApp";
+          actions.appendChild(a1);
+        }
+
+        if (item.tel2) {
+          const a2 = document.createElement("a");
+          a2.className = "btn-action btn-secondary";
+          a2.href = construirUrlWa(item.tel2, item.mensaje);
+          a2.target = "_blank";
+          a2.rel = "noopener";
+          a2.textContent = item.etiqueta2 || "WhatsApp 2";
+          actions.appendChild(a2);
+        }
+
+        const btnVer = document.createElement("button");
+        btnVer.type = "button";
+        btnVer.className = "btn-action btn-secondary";
+        btnVer.textContent = "Ver ficha";
+        btnVer.addEventListener("click", () => abrirModal(item));
+        actions.appendChild(btnVer);
+
+        card.appendChild(top);
+        card.appendChild(p);
+        card.appendChild(actions);
+        list.appendChild(card);
+      });
+    }
+
+    async function init() {
+      document.getElementById("btn-agregar-negocio").href = construirUrlWa(
+        CONFIG.waAdmin,
+        CONFIG.mensajeAgregarNegocio
+      );
+
+      document.getElementById("buscador").addEventListener("input", e => {
+        textoBusqueda = e.target.value;
+        renderListado();
+      });
+
+      document.getElementById("modal-close").addEventListener("click", cerrarModal);
+      document.getElementById("modal-backdrop").addEventListener("click", e => {
+        if (e.target.id === "modal-backdrop") cerrarModal();
+      });
+
+      [negocios, anuncios] = await Promise.all([
+        cargarCSV(CONFIG.csvDirectorio, FALLBACK_DIRECTORIO),
+        cargarCSV(CONFIG.csvAnuncios, FALLBACK_ANUNCIOS)
+      ]);
+
+      renderCategorias();
+      renderListado();
+      iniciarRotadorEspacio("rotator-arriba", "arriba");
+      iniciarRotadorEspacio("rotator-abajo", "abajo");
+    }
+
+    init();
+  </script>
+</body>
+</html>
