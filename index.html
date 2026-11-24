@@ -257,10 +257,19 @@
       line-height: 1.15;
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
       overflow-wrap: anywhere;
+    }
+
+    .cat-sub-city {
+      display: block;
+      font-size: 0.85em;
+      font-weight: 900;
+      opacity: 0.95;
+      margin-top: 2px;
     }
 
     .cat-btn.active {
@@ -947,7 +956,8 @@
       wrap.innerHTML = "";
 
       const activos = negocios.filter(n => (n.activo || "").toUpperCase().trim() === "SI");
-      const cats = [...new Set(activos.map(n => n.categoria).filter(Boolean))];
+      const cats = [...new Set(activos.map(n => n.categoria).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
 
       if (!cats.length) {
         wrap.innerHTML = '<div class="status-note">Sin categorías activas en la hoja.</div>';
@@ -958,7 +968,20 @@
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "cat-btn" + (categoriaActiva === cat ? " active" : "");
-        btn.textContent = cat;
+
+        if (cat.includes(" - ")) {
+          const [rubro, ciudad] = cat.split(" - ");
+          const spanRubro = document.createElement("span");
+          spanRubro.textContent = rubro.trim();
+          const spanCiudad = document.createElement("span");
+          spanCiudad.className = "cat-sub-city";
+          spanCiudad.textContent = ciudad.trim();
+          btn.appendChild(spanRubro);
+          btn.appendChild(spanCiudad);
+        } else {
+          btn.textContent = cat;
+        }
+
         btn.addEventListener("click", () => {
           categoriaActiva = categoriaActiva === cat ? "" : cat;
           renderCategorias();
@@ -994,6 +1017,13 @@
           `${n.negocio} ${n.detalle} ${n.categoria}`.toLowerCase().includes(q)
         );
       }
+
+      filtrados.sort((a, b) => {
+        const destA = (a.destacado || "").toUpperCase().trim() === "SI" ? 0 : 1;
+        const destB = (b.destacado || "").toUpperCase().trim() === "SI" ? 0 : 1;
+        if (destA !== destB) return destA - destB;
+        return (a.negocio || "").localeCompare(b.negocio || "", "es", { sensitivity: "base" });
+      });
 
       heading.textContent = categoriaActiva
         ? `${categoriaActiva} (${filtrados.length})`
