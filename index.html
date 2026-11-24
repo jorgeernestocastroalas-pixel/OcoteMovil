@@ -283,6 +283,7 @@
       margin-top: 14px;
       padding-top: 12px;
       border-top: 2px solid var(--border);
+      scroll-margin-top: 14px;
     }
 
     .results-topbar {
@@ -985,13 +986,13 @@
         btn.addEventListener("click", () => {
           categoriaActiva = categoriaActiva === cat ? "" : cat;
           renderCategorias();
-          renderDespliegue();
+          renderDespliegue(Boolean(categoriaActiva));
         });
         wrap.appendChild(btn);
       });
     }
 
-    function renderDespliegue() {
+    function renderDespliegue(hacerScroll = false) {
       const panel = document.getElementById("results-panel");
       const list = document.getElementById("listado");
       const heading = document.getElementById("results-heading");
@@ -1031,46 +1032,51 @@
 
       if (!filtrados.length) {
         list.innerHTML = '<div class="status-note">No hay comercios para mostrar aquí.</div>';
-        return;
+      } else {
+        filtrados.forEach(item => {
+          const card = document.createElement("article");
+          card.className = "biz-card";
+
+          const h3 = document.createElement("h4");
+          h3.className = "biz-name";
+          h3.textContent = item.negocio;
+
+          const p = document.createElement("p");
+          p.className = "biz-detail";
+          p.textContent = item.detalle;
+
+          const actions = document.createElement("div");
+          actions.className = "biz-actions";
+
+          if (item.tel1) {
+            const waBtn = document.createElement("a");
+            waBtn.className = "btn-wa";
+            waBtn.href = construirUrlWa(item.tel1, item.mensaje);
+            waBtn.target = "_blank";
+            waBtn.rel = "noopener";
+            waBtn.textContent = item.etiqueta1 || "WhatsApp";
+            actions.appendChild(waBtn);
+          }
+
+          const btnModal = document.createElement("button");
+          btnModal.type = "button";
+          btnModal.className = "btn-modal-open";
+          btnModal.textContent = item.tel2 ? "Más opciones / Ficha" : "Ver ficha";
+          btnModal.addEventListener("click", () => abrirModal(item));
+          actions.appendChild(btnModal);
+
+          card.appendChild(h3);
+          card.appendChild(p);
+          card.appendChild(actions);
+          list.appendChild(card);
+        });
       }
 
-      filtrados.forEach(item => {
-        const card = document.createElement("article");
-        card.className = "biz-card";
-
-        const h3 = document.createElement("h4");
-        h3.className = "biz-name";
-        h3.textContent = item.negocio;
-
-        const p = document.createElement("p");
-        p.className = "biz-detail";
-        p.textContent = item.detalle;
-
-        const actions = document.createElement("div");
-        actions.className = "biz-actions";
-
-        if (item.tel1) {
-          const waBtn = document.createElement("a");
-          waBtn.className = "btn-wa";
-          waBtn.href = construirUrlWa(item.tel1, item.mensaje);
-          waBtn.target = "_blank";
-          waBtn.rel = "noopener";
-          waBtn.textContent = item.etiqueta1 || "WhatsApp";
-          actions.appendChild(waBtn);
-        }
-
-        const btnModal = document.createElement("button");
-        btnModal.type = "button";
-        btnModal.className = "btn-modal-open";
-        btnModal.textContent = item.tel2 ? "Más opciones / Ficha" : "Ver ficha";
-        btnModal.addEventListener("click", () => abrirModal(item));
-        actions.appendChild(btnModal);
-
-        card.appendChild(h3);
-        card.appendChild(p);
-        card.appendChild(actions);
-        list.appendChild(card);
-      });
+      if (hacerScroll) {
+        requestAnimationFrame(() => {
+          panel.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
     }
 
     async function init() {
@@ -1081,7 +1087,7 @@
 
       document.getElementById("buscador").addEventListener("input", e => {
         textoBusqueda = e.target.value;
-        renderDespliegue();
+        renderDespliegue(false);
       });
 
       document.getElementById("btn-cerrar-categoria").addEventListener("click", () => {
@@ -1089,7 +1095,7 @@
         textoBusqueda = "";
         document.getElementById("buscador").value = "";
         renderCategorias();
-        renderDespliegue();
+        renderDespliegue(false);
       });
 
       document.getElementById("modal-close").addEventListener("click", cerrarModal);
@@ -1103,7 +1109,7 @@
       ]);
 
       renderCategorias();
-      renderDespliegue();
+      renderDespliegue(false);
       iniciarRotadorEspacio("rotator-arriba", "arriba");
       iniciarRotadorEspacio("rotator-abajo", "abajo");
     }
