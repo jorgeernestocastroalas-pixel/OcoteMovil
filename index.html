@@ -7,18 +7,22 @@
   <style>
     :root {
       --bg: #000000;
-      --surface: #111111;
-      --surface-2: #1a1a1a;
+      --panel: #0c121c;
+      --surface: #141d2b;
+      --surface-2: #1c283b;
       --text: #ffffff;
-      --muted: #cfcfcf;
-      --border: #2e2e2e;
+      --muted: #d2dae6;
+      --border: #2c3a4f;
+      --cat-top: #3b7be8;
+      --cat-bot: #1f4da8;
+      --cat-border: #6ea2ff;
       --accent: #ffffff;
       --accent-text: #000000;
     }
 
     * {
       box-sizing: border-box;
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.14);
     }
 
     html, body {
@@ -31,22 +35,22 @@
     }
 
     .app-shell {
-      max-width: 900px;
+      max-width: 780px;
       margin: 0 auto;
-      padding: 12px 14px 110px;
+      padding: 12px 12px 105px;
     }
 
-    /* Header */
+    /* Encabezado */
     .header {
       text-align: center;
-      padding: 8px 4px 12px;
+      padding: 8px 6px 10px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .brand-title {
       margin: 0;
-      font-size: 1.75rem;
+      font-size: 1.65rem;
       font-weight: 800;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -54,37 +58,34 @@
 
     .brand-sub {
       margin: 4px 0 0;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       color: var(--muted);
     }
 
-    /* Zonas de Banners (arriba / abajo / modal) */
+    /* Zonas de Banners */
     .banner-zone {
       width: 100%;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 8px;
-      margin: 10px 0 14px;
+      padding: 6px;
+      margin: 10px 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      min-height: 68px;
     }
 
     .banner-frame-728 {
       width: 100%;
       max-width: 728px;
-      min-height: 90px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
 
-    /* Escala limpia en pantallas estrechas para no desbordar */
     .ad-728-slot {
       width: 728px;
       height: 90px;
@@ -100,20 +101,19 @@
         margin-bottom: -50px;
       }
       .banner-frame-728 {
-        min-height: 52px;
+        min-height: 50px;
       }
     }
 
     .cliente-slide {
       width: 100%;
       max-width: 728px;
-      min-height: 56px;
+      min-height: 52px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 10px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
@@ -124,12 +124,12 @@
       align-items: center;
       gap: 10px;
       min-width: 0;
-      flex: 1 1 200px;
+      flex: 1 1 auto;
     }
 
     .cliente-slide-img {
-      max-height: 54px;
-      max-width: 140px;
+      max-height: 46px;
+      max-width: 120px;
       width: auto;
       height: auto;
       object-fit: cover;
@@ -138,8 +138,8 @@
     }
 
     .cliente-slide-name {
-      font-weight: 700;
-      font-size: 1rem;
+      font-weight: 800;
+      font-size: 0.98rem;
       color: var(--text);
       white-space: nowrap;
       overflow: hidden;
@@ -150,26 +150,27 @@
       background: var(--accent);
       color: var(--accent-text);
       text-decoration: none;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 10px 14px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 8px 12px;
       border-radius: 8px;
-      min-height: 44px;
+      min-height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    /* Buscador */
+    /* Buscador rápido */
     .search-box {
-      margin: 12px 0;
+      margin: 10px 0;
     }
 
     .search-input {
       width: 100%;
-      min-height: 50px;
-      padding: 12px 14px;
+      min-height: 48px;
+      padding: 10px 14px;
       font-size: 1rem;
       color: var(--text);
       background: var(--surface);
@@ -179,40 +180,62 @@
     }
 
     .search-input:focus {
-      border-color: var(--accent);
+      border-color: var(--cat-border);
     }
 
-    /* Botonera de categorías */
-    .section-label {
-      font-size: 0.9rem;
-      font-weight: 700;
-      text-transform: uppercase;
+    /* Caja principal de directorio tipo tablero en 2 columnas */
+    .directory-board {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 10px 0;
+    }
+
+    .board-head {
+      text-align: center;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .board-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 800;
       letter-spacing: 0.04em;
-      color: var(--muted);
-      margin: 14px 0 8px;
+      text-transform: uppercase;
     }
 
-    .categories-grid {
+    .board-sub {
+      margin: 3px 0 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Dos columnas firmes para las categorías */
+    .categories-two-col {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
-      margin-bottom: 16px;
     }
 
     .cat-btn {
-      min-height: 52px;
-      padding: 10px 12px;
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
+      min-height: 54px;
+      padding: 10px 10px;
       border-radius: 10px;
-      font-size: 0.98rem;
-      font-weight: 700;
+      border: 1px solid var(--cat-border);
+      background: linear-gradient(180deg, var(--cat-top) 0%, var(--cat-bot) 100%);
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.15;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      word-break: break-word;
     }
 
     .cat-btn.active {
@@ -221,91 +244,107 @@
       border-color: var(--accent);
     }
 
-    /* Tarjetas de negocios (segunda pantalla / resultados) */
+    /* Despliegue de comercios al tocar una categoría o buscar */
+    .results-panel {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .results-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .results-heading {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .btn-clear-cat {
+      min-height: 40px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     .cards-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .biz-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
+      border-radius: 10px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .biz-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
     .biz-name {
       margin: 0;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: var(--text);
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .badge-destacado {
-      background: var(--accent);
-      color: var(--accent-text);
-      font-size: 0.75rem;
-      font-weight: 800;
-      padding: 4px 8px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      flex-shrink: 0;
     }
 
     .biz-detail {
       margin: 0;
-      font-size: 0.96rem;
+      font-size: 0.92rem;
       color: var(--muted);
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
 
     .biz-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 8px;
+      margin-top: 2px;
     }
 
-    .btn-action {
-      flex: 1 1 140px;
-      min-height: 50px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--accent);
-      background: var(--accent);
-      color: var(--accent-text);
-      font-size: 0.98rem;
-      font-weight: 700;
-      cursor: pointer;
+    .btn-wa {
+      min-height: 48px;
+      padding: 10px 12px;
+      border-radius: 9px;
+      border: 1px solid #25d366;
+      background: #169c48;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 800;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      cursor: pointer;
     }
 
-    .btn-secondary {
+    .btn-modal-open {
+      min-height: 48px;
+      padding: 10px 12px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
       background: var(--surface-2);
       color: var(--text);
-      border-color: var(--border);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     /* Ventana Modal */
@@ -326,7 +365,7 @@
 
     .modal-panel {
       width: 100%;
-      max-width: 440px;
+      max-width: 420px;
       max-height: 92vh;
       overflow-y: auto;
       background: var(--surface);
@@ -347,7 +386,7 @@
 
     .modal-title {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
     }
 
@@ -363,15 +402,21 @@
       cursor: pointer;
     }
 
+    .modal-wa-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .modal-ad-320 {
       width: 100%;
       display: flex;
       justify-content: center;
-      padding-top: 6px;
+      padding-top: 8px;
       border-top: 1px solid var(--border);
     }
 
-    /* Pie fijo inferior */
+    /* Pie fijo inferior con solo los dos botones acordados */
     .footer-bar {
       position: fixed;
       left: 0;
@@ -379,12 +424,12 @@
       bottom: 0;
       background: var(--bg);
       border-top: 1px solid var(--border);
-      padding: 10px 14px;
+      padding: 10px 12px;
       z-index: 900;
     }
 
     .footer-inner {
-      max-width: 900px;
+      max-width: 780px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -393,9 +438,9 @@
 
     .footer-btn {
       min-height: 48px;
-      padding: 8px 12px;
+      padding: 8px 10px;
       border-radius: 10px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 800;
       text-decoration: none;
       display: flex;
@@ -418,7 +463,7 @@
     .status-note {
       color: var(--muted);
       font-size: 0.92rem;
-      padding: 12px 4px;
+      padding: 8px 2px;
     }
   </style>
 </head>
@@ -429,7 +474,7 @@
       <p class="brand-sub">Directorio Local · Ocotepeque y Sinuapa</p>
     </header>
 
-    <!-- BANNER SUPERIOR (rotación cada 5s con Adsterra si hay anunciantes en "arriba") -->
+    <!-- BANNER SUPERIOR -->
     <section class="banner-zone" aria-label="Anuncio superior">
       <div id="rotator-arriba" class="banner-frame-728"></div>
     </section>
@@ -440,22 +485,32 @@
         id="buscador"
         class="search-input"
         type="search"
-        placeholder="Buscar negocio, comida, mandado o barrio..."
+        placeholder="Buscar negocio, categoría o zona..."
         autocomplete="off"
       />
     </div>
 
-    <!-- CATEGORÍAS DINÁMICAS -->
-    <div class="section-label">Categorías</div>
-    <div id="categorias" class="categories-grid"></div>
+    <!-- TABLERO DE CATEGORÍAS EN DOS COLUMNAS Y DESPLIEGUE DE COMERCIOS -->
+    <section class="directory-board" aria-label="Directorio por categorías">
+      <div class="board-head">
+        <h2 class="board-title">Directorio Comercial</h2>
+        <p class="board-sub">Ocotepeque · Sinuapa · Toca una categoría</p>
+      </div>
 
-    <!-- LISTADO DE NEGOCIOS / DESTACADOS -->
-    <div id="titulo-listado" class="section-label">Negocios destacados</div>
-    <div id="listado" class="cards-list">
-      <div class="status-note">Cargando directorio...</div>
-    </div>
+      <div id="categorias" class="categories-two-col">
+        <div class="status-note">Cargando categorías...</div>
+      </div>
 
-    <!-- BANNER INFERIOR (rotación cada 5s con Adsterra si hay anunciantes en "abajo") -->
+      <div id="results-panel" class="results-panel" style="display: none;">
+        <div class="results-topbar">
+          <h3 id="results-heading" class="results-heading">Comercios</h3>
+          <button id="btn-cerrar-categoria" class="btn-clear-cat" type="button">Cerrar</button>
+        </div>
+        <div id="listado" class="cards-list"></div>
+      </div>
+    </section>
+
+    <!-- BANNER INFERIOR -->
     <section class="banner-zone" aria-label="Anuncio inferior">
       <div id="rotator-abajo" class="banner-frame-728"></div>
     </section>
@@ -465,11 +520,11 @@
   <div id="modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-panel">
       <div class="modal-header">
-        <h2 id="modal-title" class="modal-title">Detalle del negocio</h2>
+        <h2 id="modal-title" class="modal-title">Comercio</h2>
         <button id="modal-close" class="modal-close" type="button" aria-label="Cerrar">✕</button>
       </div>
       <p id="modal-detalle" class="biz-detail"></p>
-      <div id="modal-botones" class="biz-actions"></div>
+      <div id="modal-botones" class="modal-wa-list"></div>
 
       <!-- BANNER 320x50 DEBAJO DEL BOTÓN DE WHATSAPP -->
       <div id="modal-ad-container" class="modal-ad-320"></div>
@@ -500,27 +555,24 @@
       csvDirectorio: `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Directorio`,
       csvAnuncios: `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Anuncios`,
 
-      // Número de WhatsApp de administración para "Agregar negocio"
       waAdmin: "50488362713",
       mensajeAgregarNegocio: "Hola, quiero agregar mi negocio en Ocotemovil",
 
-      // Intervalo de rotación en milisegundos (5 segundos)
+      // 5 segundos exactos por ciclo cuando existan anunciantes activos
       rotacionMs: 5000,
 
-      // Claves Adsterra
       adsterra728Key: "94a60368d80726e04cbdceea35d7410e",
       adsterra320Key: "f0790f0b6da44120e1c6c4bc8bcb72bb",
       adsterraSrcBase: "https://bicea.org/22/"
     };
 
-    // Respaldo inicial tomado de tu hoja "Ocotemovil - Directorio Local"
     const FALLBACK_DIRECTORIO = [
       {
         categoria: "Domicilios y Comida",
         negocio: "Pollo Sabroso",
         detalle: "Pollo frito y combos - Barrio Las Flores",
         tel1: "50499887766",
-        etiqueta1: "Pedir por WhatsApp",
+        etiqueta1: "WhatsApp",
         tel2: "50426531122",
         etiqueta2: "WhatsApp 2",
         destacado: "SI",
@@ -532,7 +584,7 @@
         negocio: "Mandaditos Ocotepeque",
         detalle: "Envíos rápidos y compras en Ocotepeque y Sinuapa",
         tel1: "50488776655",
-        etiqueta1: "Pedir Mandado",
+        etiqueta1: "WhatsApp",
         tel2: "",
         etiqueta2: "",
         destacado: "NO",
@@ -541,29 +593,13 @@
       }
     ];
 
-    const FALLBACK_ANUNCIOS = [
-      {
-        espacio: "arriba",
-        negocio: "Ferretería El Centro",
-        imagen_url: "",
-        whatsapp_tel: "50499887766",
-        mensaje_wa: "Hola, vi su anuncio en Ocotemovil",
-        activo: "SI"
-      },
-      {
-        espacio: "abajo",
-        negocio: "Comedor Doña Marta",
-        imagen_url: "",
-        whatsapp_tel: "50488776655",
-        mensaje_wa: "Hola, los vi en Ocotemovil",
-        activo: "SI"
-      }
-    ];
+    const FALLBACK_ANUNCIOS = [];
 
     let negocios = [];
     let anuncios = [];
     let categoriaActiva = "";
     let textoBusqueda = "";
+    const rotadoresActivos = {};
 
     function construirUrlWa(telefono, mensaje) {
       const limpio = String(telefono || "").replace(/\D/g, "");
@@ -643,8 +679,12 @@
       }
     }
 
-    function renderAdsterra728(container) {
+    // Monta el bloque de Adsterra una sola vez sin re-renderizar si no hay rotación
+    function montarAdsterra728Estatico(container) {
+      if (container.dataset.adsterraMounted === "1") return;
       container.innerHTML = "";
+      container.dataset.adsterraMounted = "1";
+
       const slot = document.createElement("div");
       slot.className = "ad-728-slot";
 
@@ -656,7 +696,7 @@
       iframe.style.border = "0";
       iframe.style.background = "#000000";
 
-      const docHtml = `
+      iframe.srcdoc = `
         <!DOCTYPE html>
         <html>
         <head><meta charset="utf-8"><style>body{margin:0;padding:0;background:#000;display:flex;justify-content:center;align-items:center;}</style></head>
@@ -675,13 +715,52 @@
         </html>
       `;
 
-      iframe.srcdoc = docHtml;
+      slot.appendChild(iframe);
+      container.appendChild(slot);
+    }
+
+    function renderAdsterra728EnRotacion(container) {
+      container.dataset.adsterraMounted = "0";
+      container.innerHTML = "";
+
+      const slot = document.createElement("div");
+      slot.className = "ad-728-slot";
+
+      const iframe = document.createElement("iframe");
+      iframe.width = "728";
+      iframe.height = "90";
+      iframe.frameBorder = "0";
+      iframe.scrolling = "no";
+      iframe.style.border = "0";
+      iframe.style.background = "#000000";
+
+      iframe.srcdoc = `
+        <!DOCTYPE html>
+        <html>
+        <head><meta charset="utf-8"><style>body{margin:0;padding:0;background:#000;display:flex;justify-content:center;align-items:center;}</style></head>
+        <body>
+          <script>
+            atOptions = {
+              'key' : '${CONFIG.adsterra728Key}',
+              'format' : 'iframe',
+              'height' : 90,
+              'width' : 728,
+              'params' : {}
+            };
+          <\/script>
+          <script data-cfasync="false" src="${CONFIG.adsterraSrcBase}${CONFIG.adsterra728Key}"><\/script>
+        </body>
+        </html>
+      `;
+
       slot.appendChild(iframe);
       container.appendChild(slot);
     }
 
     function renderClienteSlide(container, anuncio) {
+      container.dataset.adsterraMounted = "0";
       container.innerHTML = "";
+
       const card = document.createElement("div");
       card.className = "cliente-slide";
 
@@ -714,38 +793,46 @@
     }
 
     function iniciarRotadorEspacio(containerId, espacioNombre) {
+      if (rotadoresActivos[containerId]) {
+        clearInterval(rotadoresActivos[containerId]);
+        delete rotadoresActivos[containerId];
+      }
+
       const container = document.getElementById(containerId);
       const activos = anuncios.filter(
-        a => (a.espacio || "").toLowerCase() === espacioNombre && (a.activo || "").toUpperCase() === "SI"
+        a =>
+          (a.espacio || "").toLowerCase().trim() === espacioNombre &&
+          (a.activo || "").toUpperCase().trim() === "SI"
       );
 
-      // Sin anunciantes activos: Adsterra fijo
+      // Sin anunciantes activos: Adsterra totalmente inmóvil y sin ciclo de intervalo
       if (!activos.length) {
-        renderAdsterra728(container);
+        montarAdsterra728Estatico(container);
         return;
       }
 
-      // Con anunciantes activos: gira cada 5s incluyendo Adsterra ("adsterra" + cada cliente)
+      // Con anunciantes activos: rota cada 5 segundos (5000 ms) incluyendo Adsterra
       const items = [{ tipo: "adsterra" }, ...activos.map(a => ({ tipo: "cliente", data: a }))];
       let idx = 0;
 
       const mostrarActual = () => {
         const current = items[idx % items.length];
         if (current.tipo === "adsterra") {
-          renderAdsterra728(container);
+          renderAdsterra728EnRotacion(container);
         } else {
           renderClienteSlide(container, current.data);
         }
-        idx++;
+        idx = (idx + 1) % items.length;
       };
 
       mostrarActual();
-      setInterval(mostrarActual, CONFIG.rotacionMs);
+      rotadoresActivos[containerId] = setInterval(mostrarActual, CONFIG.rotacionMs);
     }
 
     function renderModalBanner320() {
       const modalAd = document.getElementById("modal-ad-container");
       modalAd.innerHTML = "";
+
       const iframe = document.createElement("iframe");
       iframe.width = "320";
       iframe.height = "50";
@@ -776,30 +863,30 @@
     }
 
     function abrirModal(item) {
-      document.getElementById("modal-title").textContent = item.negocio || "Negocio";
+      document.getElementById("modal-title").textContent = item.negocio || "Comercio";
       document.getElementById("modal-detalle").textContent = item.detalle || "";
 
       const botonesWrap = document.getElementById("modal-botones");
       botonesWrap.innerHTML = "";
 
       if (item.tel1) {
-        const b1 = document.createElement("a");
-        b1.className = "btn-action";
-        b1.href = construirUrlWa(item.tel1, item.mensaje);
-        b1.target = "_blank";
-        b1.rel = "noopener";
-        b1.textContent = item.etiqueta1 || "WhatsApp";
-        botonesWrap.appendChild(b1);
+        const w1 = document.createElement("a");
+        w1.className = "btn-wa";
+        w1.href = construirUrlWa(item.tel1, item.mensaje);
+        w1.target = "_blank";
+        w1.rel = "noopener";
+        w1.textContent = item.etiqueta1 || "WhatsApp";
+        botonesWrap.appendChild(w1);
       }
 
       if (item.tel2) {
-        const b2 = document.createElement("a");
-        b2.className = "btn-action btn-secondary";
-        b2.href = construirUrlWa(item.tel2, item.mensaje);
-        b2.target = "_blank";
-        b2.rel = "noopener";
-        b2.textContent = item.etiqueta2 || "WhatsApp 2";
-        botonesWrap.appendChild(b2);
+        const w2 = document.createElement("a");
+        w2.className = "btn-wa";
+        w2.href = construirUrlWa(item.tel2, item.mensaje);
+        w2.target = "_blank";
+        w2.rel = "noopener";
+        w2.textContent = item.etiqueta2 || "WhatsApp 2";
+        botonesWrap.appendChild(w2);
       }
 
       renderModalBanner320();
@@ -815,7 +902,14 @@
       const wrap = document.getElementById("categorias");
       wrap.innerHTML = "";
 
-      const cats = [...new Set(negocios.map(n => n.categoria).filter(Boolean))];
+      const activos = negocios.filter(n => (n.activo || "").toUpperCase().trim() === "SI");
+      const cats = [...new Set(activos.map(n => n.categoria).filter(Boolean))];
+
+      if (!cats.length) {
+        wrap.innerHTML = '<div class="status-note">Sin categorías activas en la hoja.</div>';
+        return;
+      }
+
       cats.forEach(cat => {
         const btn = document.createElement("button");
         btn.type = "button";
@@ -824,36 +918,46 @@
         btn.addEventListener("click", () => {
           categoriaActiva = categoriaActiva === cat ? "" : cat;
           renderCategorias();
-          renderListado();
+          renderDespliegue();
         });
         wrap.appendChild(btn);
       });
     }
 
-    function renderListado() {
+    function renderDespliegue() {
+      const panel = document.getElementById("results-panel");
       const list = document.getElementById("listado");
-      const titulo = document.getElementById("titulo-listado");
+      const heading = document.getElementById("results-heading");
+      const q = textoBusqueda.toLowerCase().trim();
+
+      // Solo despliega al tocar un botón de categoría o escribir en el buscador
+      if (!categoriaActiva && !q) {
+        panel.style.display = "none";
+        list.innerHTML = "";
+        return;
+      }
+
+      panel.style.display = "block";
       list.innerHTML = "";
 
-      const q = textoBusqueda.toLowerCase().trim();
-      let filtrados = negocios.filter(n => (n.activo || "SI").toUpperCase() === "SI");
+      let filtrados = negocios.filter(n => (n.activo || "").toUpperCase().trim() === "SI");
+
+      if (categoriaActiva) {
+        filtrados = filtrados.filter(n => n.categoria === categoriaActiva);
+      }
 
       if (q) {
-        titulo.textContent = `Resultados para "${textoBusqueda}"`;
         filtrados = filtrados.filter(n =>
           `${n.negocio} ${n.detalle} ${n.categoria}`.toLowerCase().includes(q)
         );
-      } else if (categoriaActiva) {
-        titulo.textContent = categoriaActiva;
-        filtrados = filtrados.filter(n => n.categoria === categoriaActiva);
-      } else {
-        titulo.textContent = "Negocios destacados";
-        const destacados = filtrados.filter(n => (n.destacado || "").toUpperCase() === "SI");
-        filtrados = destacados.length ? destacados : filtrados;
       }
 
+      heading.textContent = categoriaActiva
+        ? `${categoriaActiva} (${filtrados.length})`
+        : `Resultados: "${textoBusqueda}"`;
+
       if (!filtrados.length) {
-        list.innerHTML = '<div class="status-note">No se encontraron negocios con ese filtro.</div>';
+        list.innerHTML = '<div class="status-note">No hay comercios para mostrar aquí.</div>';
         return;
       }
 
@@ -861,20 +965,9 @@
         const card = document.createElement("article");
         card.className = "biz-card";
 
-        const top = document.createElement("div");
-        top.className = "biz-top";
-
-        const h3 = document.createElement("h3");
+        const h3 = document.createElement("h4");
         h3.className = "biz-name";
         h3.textContent = item.negocio;
-        top.appendChild(h3);
-
-        if ((item.destacado || "").toUpperCase() === "SI") {
-          const badge = document.createElement("span");
-          badge.className = "badge-destacado";
-          badge.textContent = "Destacado";
-          top.appendChild(badge);
-        }
 
         const p = document.createElement("p");
         p.className = "biz-detail";
@@ -884,33 +977,23 @@
         actions.className = "biz-actions";
 
         if (item.tel1) {
-          const a1 = document.createElement("a");
-          a1.className = "btn-action";
-          a1.href = construirUrlWa(item.tel1, item.mensaje);
-          a1.target = "_blank";
-          a1.rel = "noopener";
-          a1.textContent = item.etiqueta1 || "WhatsApp";
-          actions.appendChild(a1);
+          const waBtn = document.createElement("a");
+          waBtn.className = "btn-wa";
+          waBtn.href = construirUrlWa(item.tel1, item.mensaje);
+          waBtn.target = "_blank";
+          waBtn.rel = "noopener";
+          waBtn.textContent = item.etiqueta1 || "WhatsApp";
+          actions.appendChild(waBtn);
         }
 
-        if (item.tel2) {
-          const a2 = document.createElement("a");
-          a2.className = "btn-action btn-secondary";
-          a2.href = construirUrlWa(item.tel2, item.mensaje);
-          a2.target = "_blank";
-          a2.rel = "noopener";
-          a2.textContent = item.etiqueta2 || "WhatsApp 2";
-          actions.appendChild(a2);
-        }
+        const btnModal = document.createElement("button");
+        btnModal.type = "button";
+        btnModal.className = "btn-modal-open";
+        btnModal.textContent = item.tel2 ? "Más opciones / Ficha" : "Ver ficha";
+        btnModal.addEventListener("click", () => abrirModal(item));
+        actions.appendChild(btnModal);
 
-        const btnVer = document.createElement("button");
-        btnVer.type = "button";
-        btnVer.className = "btn-action btn-secondary";
-        btnVer.textContent = "Ver ficha";
-        btnVer.addEventListener("click", () => abrirModal(item));
-        actions.appendChild(btnVer);
-
-        card.appendChild(top);
+        card.appendChild(h3);
         card.appendChild(p);
         card.appendChild(actions);
         list.appendChild(card);
@@ -925,7 +1008,15 @@
 
       document.getElementById("buscador").addEventListener("input", e => {
         textoBusqueda = e.target.value;
-        renderListado();
+        renderDespliegue();
+      });
+
+      document.getElementById("btn-cerrar-categoria").addEventListener("click", () => {
+        categoriaActiva = "";
+        textoBusqueda = "";
+        document.getElementById("buscador").value = "";
+        renderCategorias();
+        renderDespliegue();
       });
 
       document.getElementById("modal-close").addEventListener("click", cerrarModal);
@@ -939,7 +1030,7 @@
       ]);
 
       renderCategorias();
-      renderListado();
+      renderDespliegue();
       iniciarRotadorEspacio("rotator-arriba", "arriba");
       iniciarRotadorEspacio("rotator-abajo", "abajo");
     }
