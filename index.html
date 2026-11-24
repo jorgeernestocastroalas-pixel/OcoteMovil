@@ -34,8 +34,8 @@
       background: var(--bg);
       color: var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      font-size: clamp(28px, 3.2vw, 50px);
-      line-height: 1.15;
+      font-size: clamp(14px, 1.8vw, 24px);
+      line-height: 1.2;
       min-height: 100vh;
     }
 
@@ -43,7 +43,7 @@
       width: 100%;
       max-width: 980px;
       margin: 0 auto;
-      padding: 16px 14px 210px;
+      padding: 10px 10px 135px;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -53,11 +53,11 @@
     .header {
       width: 100%;
       text-align: center;
-      padding: 8px;
+      padding: 6px;
       background: var(--bg);
       border: 2px solid var(--border);
-      border-radius: 14px;
-      margin-bottom: 14px;
+      border-radius: 12px;
+      margin-bottom: 10px;
       overflow: hidden;
     }
 
@@ -65,10 +65,11 @@
       width: 100%;
       max-width: 100%;
       height: auto;
-      max-height: 210px;
-      object-fit: cover;
+      max-height: 145px;
+      object-fit: contain;
       display: block;
-      border-radius: 10px;
+      margin: 0 auto;
+      border-radius: 8px;
     }
 
     /* Zonas de Banners */
@@ -77,8 +78,8 @@
       max-width: 100%;
       background: var(--bg);
       border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 8px;
+      border-radius: 12px;
+      padding: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -86,20 +87,20 @@
     }
 
     .banner-zone-top {
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .banner-zone-bottom {
       margin-top: auto;
-      padding-top: 10px;
-      margin-bottom: 16px;
-      transform: translateY(20px);
+      padding-top: 8px;
+      margin-bottom: 10px;
+      transform: translateY(12px);
     }
 
     .banner-frame-728 {
       width: 100%;
       max-width: 728px;
-      min-height: 60px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -117,11 +118,11 @@
 
     @media (max-width: 759px) {
       .ad-728-slot {
-        transform: scale(0.46);
-        margin-bottom: -48px;
+        transform: scale(0.5);
+        margin-bottom: -44px;
       }
       .banner-frame-728 {
-        min-height: 52px;
+        min-height: 46px;
       }
     }
 
@@ -130,35 +131,35 @@
       max-width: 100%;
       background: var(--surface);
       border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 10px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .cliente-slide-info {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       width: 100%;
     }
 
     .cliente-slide-img {
-      max-height: 80px;
+      max-height: 70px;
       max-width: 100%;
       width: auto;
       height: auto;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 8px;
       display: block;
     }
 
     .cliente-slide-name {
       font-weight: 800;
-      font-size: clamp(26px, 3vw, 44px);
+      font-size: clamp(15px, 2vw, 24px);
       color: var(--text);
       text-align: center;
       line-height: 1.15;
@@ -171,10 +172,10 @@
       color: var(--accent-text);
       text-decoration: none;
       font-weight: 900;
-      font-size: clamp(26px, 3vw, 44px);
-      padding: 12px 16px;
-      border-radius: 12px;
-      min-height: 64px;
+      font-size: clamp(15px, 2vw, 24px);
+      padding: 10px 14px;
+      border-radius: 10px;
+      min-height: 46px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -184,20 +185,20 @@
     /* Buscador */
     .search-box {
       width: 100%;
-      margin: 12px 0 16px;
+      margin: 8px 0 10px;
     }
 
     .search-input {
       width: 100%;
       max-width: 100%;
-      min-height: 66px;
-      padding: 12px 14px;
-      font-size: clamp(24px, 2.8vw, 40px);
+      min-height: 46px;
+      padding: 8px 12px;
+      font-size: clamp(14px, 1.8vw, 22px);
       font-weight: 700;
       color: var(--text);
       background: var(--surface);
       border: 2px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
       outline: none;
     }
 
@@ -211,25 +212,25 @@
       max-width: 100%;
       background: var(--panel);
       border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 12px 18px;
-      margin-bottom: 18px;
+      border-radius: 12px;
+      padding: 10px 10px 14px;
+      margin-bottom: 12px;
       overflow: hidden;
     }
 
     .board-head {
       text-align: center;
-      padding-bottom: 12px;
-      margin-bottom: 14px;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
       border-bottom: 2px solid var(--border);
     }
 
     .board-prompt {
       margin: 0;
-      font-size: clamp(28px, 3.2vw, 48px);
+      font-size: clamp(16px, 2.2vw, 26px);
       font-weight: 900;
       letter-spacing: 0.01em;
-      line-height: 1.12;
+      line-height: 1.15;
       color: var(--text);
       overflow-wrap: anywhere;
     }
@@ -239,21 +240,21 @@
       width: 100%;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      gap: 10px;
     }
 
     .cat-btn {
       width: 100%;
       min-width: 0;
-      min-height: 84px;
-      padding: 12px 10px;
-      border-radius: 12px;
+      min-height: 54px;
+      padding: 10px 8px;
+      border-radius: 10px;
       border: 2px solid var(--cat-border);
       background: linear-gradient(180deg, var(--cat-top) 0%, var(--cat-bot) 100%);
       color: var(--text);
-      font-size: clamp(24px, 2.8vw, 40px);
+      font-size: clamp(14px, 1.8vw, 22px);
       font-weight: 800;
-      line-height: 1.12;
+      line-height: 1.15;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -270,8 +271,8 @@
 
     /* Despliegue de comercios */
     .results-panel {
-      margin-top: 20px;
-      padding-top: 16px;
+      margin-top: 14px;
+      padding-top: 12px;
       border-top: 2px solid var(--border);
     }
 
@@ -279,27 +280,27 @@
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 8px;
+      margin-bottom: 10px;
     }
 
     .results-heading {
       margin: 0;
-      font-size: clamp(26px, 3vw, 46px);
+      font-size: clamp(15px, 2vw, 24px);
       font-weight: 900;
       text-transform: uppercase;
-      line-height: 1.12;
+      line-height: 1.15;
       overflow-wrap: anywhere;
     }
 
     .btn-clear-cat {
-      min-height: 62px;
-      padding: 10px 14px;
-      border-radius: 12px;
+      min-height: 44px;
+      padding: 8px 12px;
+      border-radius: 10px;
       border: 2px solid var(--border);
       background: var(--surface-2);
       color: var(--text);
-      font-size: clamp(24px, 2.8vw, 40px);
+      font-size: clamp(14px, 1.8vw, 22px);
       font-weight: 800;
       cursor: pointer;
     }
@@ -307,54 +308,54 @@
     .cards-list {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
     }
 
     .biz-card {
       background: var(--surface);
       border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 12px;
+      border-radius: 10px;
+      padding: 12px 10px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .biz-name {
       margin: 0;
-      font-size: clamp(28px, 3.2vw, 48px);
+      font-size: clamp(16px, 2.1vw, 25px);
       font-weight: 900;
       text-transform: uppercase;
       color: var(--text);
-      line-height: 1.12;
+      line-height: 1.15;
       overflow-wrap: anywhere;
     }
 
     .biz-detail {
       margin: 0;
-      font-size: clamp(24px, 2.8vw, 40px);
+      font-size: clamp(14px, 1.8vw, 22px);
       font-weight: 500;
       color: var(--muted);
-      line-height: 1.2;
+      line-height: 1.25;
       overflow-wrap: anywhere;
     }
 
     .biz-actions {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       margin-top: 4px;
     }
 
     .btn-wa {
       width: 100%;
-      min-height: 66px;
-      padding: 12px 14px;
-      border-radius: 12px;
+      min-height: 48px;
+      padding: 10px 12px;
+      border-radius: 10px;
       border: 2px solid #25d366;
       background: #169c48;
       color: #ffffff;
-      font-size: clamp(24px, 2.8vw, 40px);
+      font-size: clamp(14px, 1.8vw, 22px);
       font-weight: 800;
       line-height: 1.15;
       text-decoration: none;
@@ -367,13 +368,13 @@
 
     .btn-modal-open {
       width: 100%;
-      min-height: 62px;
-      padding: 12px 14px;
-      border-radius: 12px;
+      min-height: 44px;
+      padding: 8px 12px;
+      border-radius: 10px;
       border: 2px solid var(--border);
       background: var(--surface-2);
       color: var(--text);
-      font-size: clamp(24px, 2.8vw, 40px);
+      font-size: clamp(14px, 1.8vw, 22px);
       font-weight: 800;
       line-height: 1.15;
       cursor: pointer;
@@ -406,11 +407,11 @@
       overflow-y: auto;
       background: var(--surface);
       border: 2px solid var(--accent);
-      border-radius: 14px;
-      padding: 14px 12px;
+      border-radius: 12px;
+      padding: 12px 10px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .modal-header {
@@ -422,21 +423,21 @@
 
     .modal-title {
       margin: 0;
-      font-size: clamp(26px, 3vw, 46px);
+      font-size: clamp(16px, 2.1vw, 25px);
       font-weight: 900;
       text-transform: uppercase;
-      line-height: 1.12;
+      line-height: 1.15;
       overflow-wrap: anywhere;
     }
 
     .modal-close {
-      min-width: 60px;
-      min-height: 60px;
-      border-radius: 10px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 8px;
       border: 2px solid var(--border);
       background: var(--surface-2);
       color: var(--text);
-      font-size: clamp(24px, 2.8vw, 40px);
+      font-size: clamp(15px, 1.9vw, 22px);
       font-weight: 900;
       cursor: pointer;
       flex-shrink: 0;
@@ -445,14 +446,14 @@
     .modal-wa-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .modal-ad-320 {
       width: 100%;
       display: flex;
       justify-content: center;
-      padding-top: 10px;
+      padding-top: 8px;
       border-top: 2px solid var(--border);
     }
 
@@ -465,7 +466,7 @@
       width: 100%;
       background: var(--bg);
       border-top: 2px solid var(--accent);
-      padding: 8px;
+      padding: 6px 8px;
       z-index: 900;
     }
 
@@ -475,17 +476,17 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 8px;
     }
 
     .footer-btn {
       min-width: 0;
-      min-height: 64px;
-      padding: 8px 8px;
-      border-radius: 10px;
-      font-size: clamp(22px, 2.6vw, 40px);
+      min-height: 46px;
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-size: clamp(14px, 1.7vw, 22px);
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.15;
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -507,8 +508,8 @@
 
     .status-note {
       color: var(--muted);
-      font-size: clamp(24px, 2.8vw, 40px);
-      padding: 8px 4px;
+      font-size: clamp(14px, 1.8vw, 22px);
+      padding: 6px 4px;
     }
   </style>
 </head>
